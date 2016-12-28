@@ -620,6 +620,7 @@
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
     <Content Include="Areas\FishpondManager\Views\Web.config" />
     <Content Include="Areas\FishpondManager\Views\Device\Index.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\Device\Form.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

@@ -4,7 +4,7 @@
     [F_Code] VARCHAR(50) NULL, 
     [F_Category_Id] VARCHAR(50) NULL, 
     [F_CName] VARCHAR(50) NULL, 
-    [F_OrgNo] INT NULL, 
+    [F_OrgNo] VARCHAR(100) NULL, 
     [F_HeadIcon] VARCHAR(50) NULL, 
     [F_SortCode] INT NULL, 
     [F_DeleteMark] BIT NULL, 

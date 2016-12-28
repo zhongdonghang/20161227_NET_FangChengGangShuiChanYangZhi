@@ -1,5 +1,7 @@
-﻿using NFine.Application.SystemManage;
+﻿using NFine.Application.FishpondManager;
+using NFine.Application.SystemManage;
 using NFine.Code;
+using NFine.Domain.Entity.FishpondManager;
 using NFine.Domain.Entity.SystemManage;
 using System;
 using System.Collections.Generic;
@@ -13,26 +15,68 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
     {
         //
         // GET: /FishpondManager/Device/
-
         private OrganizeApp organizeApp = new OrganizeApp();
+        private TDeviceApp objTDeviceApp = new TDeviceApp();
+        private TDeviceTypeApp objTDeviceTypeApp = new TDeviceTypeApp();
 
-        public ActionResult Index()
+        /// <summary>
+        /// 提交添加和编辑
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitForm(TDeviceEntity entity, string keyValue)
         {
-            return View();
+          //  entity.F_OrgNo = OperatorProvider.Provider.GetCurrent().OrganizeId;
+            entity.F_HeadIcon = "-";
+            entity.F_DeleteMark = false;
+            entity.F_EnabledMark = true;
+            objTDeviceApp.SubmitForm(entity, keyValue);
+            return Success("操作成功。");
         }
 
-        private ItemsApp itemsApp = new ItemsApp();
+        /// <summary>
+        /// 获取设备类型下拉列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetCategorySelectJson()
+        {
+            var data = objTDeviceTypeApp.GetList();
+            return Content(data.ToJson());
+        }
 
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetTreeSelectJson()
+        {
+           var data = organizeApp.GetList(OperatorProvider.Provider.GetCurrent().OrganizeId);
+            return Content(data.ToJson());
+            //var treeList = new List<TreeSelectModel>();
+            //foreach (OrganizeEntity item in data)
+            //{
+            //    TreeSelectModel treeModel = new TreeSelectModel();
+            //    treeModel.id = item.F_Id;
+            //    treeModel.text = item.F_FullName;
+            //    treeModel.parentId = item.F_ParentId;
+            //    treeModel.data = item;
+            //    treeList.Add(treeModel);
+            //}
+            //return Content(treeList.TreeSelectJson());
+        }
 
+        /// <summary>
+        /// 加载左边当前登录用户的组织架构
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetTreeJson()
         {
-            //var data = organizeApp.GetList();
             var data = organizeApp.GetList(OperatorProvider.Provider.GetCurrent().OrganizeId);
             var treeList = new List<TreeViewModel>();
-
-            string testString = "";
 
             foreach (OrganizeEntity item in data)
             {
@@ -45,9 +89,6 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
                 tree.isexpand = true;
                 tree.complete = true;
                 tree.hasChildren = hasChildren;
-
-                testString += tree.GetString() + "$$\n";
-
                 treeList.Add(tree);
             }
             return Content(treeList.TreeViewJson(data[0].F_Id));
