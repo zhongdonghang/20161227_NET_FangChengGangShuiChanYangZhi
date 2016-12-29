@@ -125,6 +125,8 @@
     <Compile Include="Areas\FishpondManager\Controllers\SensorDataController.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\WeatherDataController.cs" />
     <Compile Include="Areas\FishpondManager\FishpondManagerAreaRegistration.cs" />
+    <Compile Include="Areas\Meteorological\Controllers\StationController.cs" />
+    <Compile Include="Areas\Meteorological\MeteorologicalAreaRegistration.cs" />
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
@@ -566,6 +568,8 @@
   <ItemGroup>
     <Folder Include="Areas\FishpondManager\Models\" />
     <Folder Include="Areas\FishpondManager\Views\Shared\" />
+    <Folder Include="Areas\Meteorological\Models\" />
+    <Folder Include="Areas\Meteorological\Views\Shared\" />
     <Folder Include="Areas\ReportManage\Views\Echarts\" />
   </ItemGroup>
   <ItemGroup>
@@ -625,6 +629,10 @@
     <Content Include="Areas\FishpondManager\Views\Device\Form.cshtml" />
     <Content Include="Areas\FishpondManager\Views\SensorData\Index.cshtml" />
     <Content Include="Areas\FishpondManager\Views\WeatherData\Index.cshtml" />
+    <Content Include="Areas\Meteorological\Views\Web.config" />
+    <Content Include="Areas\Meteorological\Views\Station\Index.cshtml" />
+    <Content Include="Areas\Meteorological\Views\Station\Form.cshtml" />
+    <Content Include="Areas\Meteorological\Views\Station\Details.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

@@ -52,6 +52,7 @@
     <Compile Include="FishpondManager\TDeviceTypeMap.cs" />
     <Compile Include="FishpondManager\TSensorDataMap.cs" />
     <Compile Include="FishpondManager\TWeatherDataMap.cs" />
+    <Compile Include="Meteorological\TMeteorologicalStationMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManage\AreaMap.cs" />
     <Compile Include="SystemManage\ItemsDetailMap.cs" />

@@ -48,6 +48,7 @@
     <Compile Include="03 Entity\FishpondManager\TDeviceTypeEntity.cs" />
     <Compile Include="03 Entity\FishpondManager\TSensorDataEntity.cs" />
     <Compile Include="03 Entity\FishpondManager\TWeatherDataEntity.cs" />
+    <Compile Include="03 Entity\Meteorological\TMeteorologicalStationEntity.cs" />
     <Compile Include="03 Entity\SystemManage\AreaEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleButtonEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleEntity.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="04 IRepository\FishpondManager\ITDeviceTypeRepository.cs" />
     <Compile Include="04 IRepository\FishpondManager\ITSensorDataRepository.cs" />
     <Compile Include="04 IRepository\FishpondManager\ITWeatherDataRepository.cs" />
+    <Compile Include="04 IRepository\Meteorological\ITMeteorologicalStationRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IAreaRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IItemsDetailRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IItemsRepository.cs" />
