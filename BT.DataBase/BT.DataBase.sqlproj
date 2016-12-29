@@ -163,6 +163,8 @@
     </Build>
     <Build Include="dbo\Tables\T_Device.sql" />
     <Build Include="dbo\Tables\T_Device_Type.sql" />
+    <Build Include="dbo\Tables\T_Weather_Data.sql" />
+    <Build Include="dbo\Tables\T_Sensor_Data.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="T_Device_Type_Insert.PostDeployment1.sql" />

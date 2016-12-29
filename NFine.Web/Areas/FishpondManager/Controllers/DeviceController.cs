@@ -19,10 +19,7 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
         private TDeviceApp objTDeviceApp = new TDeviceApp();
         private TDeviceTypeApp objTDeviceTypeApp = new TDeviceTypeApp();
 
-        //[HttpPost]
-        //[HandlerAjaxOnly]
-        //[HandlerAuthorize]
-        //[ValidateAntiForgeryToken]
+
         public ActionResult DeleteForm(string keyValue)
         {
             objTDeviceApp.Delete(objTDeviceApp.GetForm(keyValue));

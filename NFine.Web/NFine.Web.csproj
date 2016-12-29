@@ -122,6 +122,8 @@
     <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\DeviceController.cs" />
+    <Compile Include="Areas\FishpondManager\Controllers\SensorDataController.cs" />
+    <Compile Include="Areas\FishpondManager\Controllers\WeatherDataController.cs" />
     <Compile Include="Areas\FishpondManager\FishpondManagerAreaRegistration.cs" />
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
@@ -621,6 +623,8 @@
     <Content Include="Areas\FishpondManager\Views\Web.config" />
     <Content Include="Areas\FishpondManager\Views\Device\Index.cshtml" />
     <Content Include="Areas\FishpondManager\Views\Device\Form.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\SensorData\Index.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\WeatherData\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

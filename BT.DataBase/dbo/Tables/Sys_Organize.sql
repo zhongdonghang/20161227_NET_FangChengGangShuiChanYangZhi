@@ -14,6 +14,8 @@
     [F_Email]            VARCHAR (50)  NULL,
     [F_AreaId]           VARCHAR (50)  NULL,
     [F_Address]          VARCHAR (500) NULL,
+	 [F_Address_X]          VARCHAR (100) NULL,
+	  [F_Address_Y]          VARCHAR (100) NULL,
     [F_AllowEdit]        BIT           NULL,
     [F_AllowDelete]      BIT           NULL,
     [F_SortCode]         INT           NULL,
