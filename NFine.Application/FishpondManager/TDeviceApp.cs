@@ -74,7 +74,7 @@ namespace NFine.Application.FishpondManager
 		public void SubmitForm(TDeviceEntity entity, string keyValue)
         {
             //判断F_Code 不能重复
-           int count  = service.IQueryable().Count(t => t.F_Code == entity.F_Code && t.F_Id != entity.F_Id);
+           int count  = service.IQueryable().Count(t => t.F_Code == entity.F_Code && t.F_Id != keyValue);
 
             //获取类别名称和所属机构名称
             string orgName =  objIOrganizeRepository.FindEntity(entity.F_OrgNo).F_FullName;

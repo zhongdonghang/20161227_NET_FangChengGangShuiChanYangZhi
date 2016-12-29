@@ -22,16 +22,20 @@ namespace NFine.Application.FishpondManager
 		private ITSensorDataRepository service = new TSensorDataRepository();
 
 
-        public List<TSensorDataEntity> GetList(Pagination pagination, string keyword,string itemId)
+        public List<TSensorDataEntity> GetList(Pagination pagination, string keyword , string itemId)
         {
             var expression = ExtLinq.True<TSensorDataEntity>();
+          
             if (!string.IsNullOrEmpty(keyword))
             {
                 expression = expression.And(t => t.F_Device_Name.Contains(keyword));
                 expression = expression.Or(t => t.F_Device_Code.Contains(keyword));
             }
-            expression.And(t=>t.F_OrgNo== itemId);
-            return service.FindList(expression, pagination);
+
+            expression = expression.And(t => t.F_OrgNo==itemId);
+
+            List<TSensorDataEntity> list = service.FindList(expression, pagination);
+            return list;
         }
 
       //  public List<TSensorDataEntity> GetList(Pagination pagination, string queryJson)
