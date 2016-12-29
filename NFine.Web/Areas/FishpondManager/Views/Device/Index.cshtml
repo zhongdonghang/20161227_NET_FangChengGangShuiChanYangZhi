@@ -24,9 +24,10 @@
             height: $(window).height() - 96,
             colModel: [
                 { label: "主键", name: "F_Id", hidden: true, key: true },
-                { label: '设备名称', name: 'F_CName', width: 200, align: 'left' },
-                { label: '设备编号', name: 'F_Code', width: 200, align: 'left' },
-               // { label: '排序', name: 'F_SortCode', width: 80, align: 'center' },
+                { label: '设备名称', name: 'F_CName', width: 110, align: 'left' },
+                { label: '设备编号', name: 'F_Code', width: 80, align: 'left' },
+                 { label: '设备类型', name: 'F_Category_Name', width: 110, align: 'left' },
+                { label: '使用单位', name: 'F_Org_Name', width: 80, align: 'center' },
                 {
                     label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
@@ -37,15 +38,17 @@
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
-                { label: "备注", name: "F_Description", index: "F_Description", width: 250, align: "left", sortable: false }
+                { label: "备注", name: "F_Description", index: "F_Description", width: 180, align: "left", sortable: false }
             ]
         });
-        $("#btn_search").click(function () {
+        $("#btn_search").click(
+            function () {
             $gridList.jqGrid('setGridParam', {
-                url: "",
+                url: "/FishpondManager/Device/GetGridJson",
                 postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
             }).trigger('reloadGrid');
-        });
+            }
+        );
     }
 
     ///添加设备
@@ -60,6 +63,43 @@
             callBack: function (iframeId) {
                 top.frames[iframeId].submitForm();
             }
+        });
+    }
+
+
+    function btn_edit() {
+        var itemName = $("#itemTree").getCurrentNode().text;
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Form",
+            title: itemName + " 》编辑设备",
+            url: "/FishpondManager/Device/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "520px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/FishpondManager/Device/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            success: function () {
+                $("#gridList").resetSelection();
+                $("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看设备",
+            url: "/FishpondManager/Device/Details?keyValue=" + keyValue,
+            width: "450px",
+            height: "470px",
+            btn: null,
         });
     }
  

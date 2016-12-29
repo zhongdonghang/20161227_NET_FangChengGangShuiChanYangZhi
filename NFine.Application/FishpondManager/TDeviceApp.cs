@@ -7,10 +7,13 @@
 // * history : Created by T4 12/28/2016 15:07:16 
 // </copyright>
 //-----------------------------------------------------------------------
+using NFine.Application.SystemManage;
 using NFine.Code;
 using NFine.Domain.Entity.FishpondManager;
 using NFine.Domain.IRepository.FishpondManager;
+using NFine.Domain.IRepository.SystemManage;
 using NFine.Repository.FishpondManager;
+using NFine.Repository.SystemManage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +24,32 @@ namespace NFine.Application.FishpondManager
     {
 		private ITDeviceRepository service = new TDeviceRepository();
 
-		public List<TDeviceEntity> GetList(Pagination pagination, string queryJson)
+        private IOrganizeRepository objIOrganizeRepository = new OrganizeRepository();
+        private ITDeviceTypeRepository objITDeviceTypeRepository = new TDeviceTypeRepository();
+
+        /// <summary>
+        /// 根据组织机构节点获取设备列表
+        /// </summary>
+        /// <param name="orgNo"></param>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public List<TDeviceEntity> GetList(string orgNo, string keyword)
+        {
+            var expression = ExtLinq.True<TDeviceEntity>();
+            if (!string.IsNullOrEmpty(orgNo))
+            {
+                expression = expression.And(t => t.F_OrgNo == orgNo);
+            }
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.F_CName.Contains(keyword));
+                expression = expression.Or(t => t.F_Code.Contains(keyword));
+            }
+            return service.IQueryable(expression).OrderBy(t => t.F_SortCode).ToList();
+        }
+
+
+        public List<TDeviceEntity> GetList(Pagination pagination, string queryJson)
         {
 		    var expression = ExtLinq.True<TDeviceEntity>();
             var queryParam = queryJson.ToJObject();
@@ -45,16 +73,33 @@ namespace NFine.Application.FishpondManager
 
 		public void SubmitForm(TDeviceEntity entity, string keyValue)
         {
-            if (!string.IsNullOrEmpty(keyValue))
+            //判断F_Code 不能重复
+           int count  = service.IQueryable().Count(t => t.F_Code == entity.F_Code && t.F_Id != entity.F_Id);
+
+            //获取类别名称和所属机构名称
+            string orgName =  objIOrganizeRepository.FindEntity(entity.F_OrgNo).F_FullName;
+            string categoryName = objITDeviceTypeRepository.FindEntity(entity.F_Category_Id).F_Category_Name;
+            entity.F_Org_Name = orgName;
+            entity.F_Category_Name = categoryName;
+            if (count == 0)
             {
-                entity.Modify(keyValue);
-                service.Update(entity);
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    entity.Modify(keyValue);
+                    service.Update(entity);
+                }
+                else
+                {
+                    entity.Create();
+                    service.Insert(entity);
+                }
             }
             else
             {
-                entity.Create();
-                service.Insert(entity);
+                throw new Exception("已经存在相同的设备编号，请更换一个");
             }
+
+
         }
     }
 }

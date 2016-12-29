@@ -19,6 +19,32 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
         private TDeviceApp objTDeviceApp = new TDeviceApp();
         private TDeviceTypeApp objTDeviceTypeApp = new TDeviceTypeApp();
 
+        //[HttpPost]
+        //[HandlerAjaxOnly]
+        //[HandlerAuthorize]
+        //[ValidateAntiForgeryToken]
+        public ActionResult DeleteForm(string keyValue)
+        {
+            objTDeviceApp.Delete(objTDeviceApp.GetForm(keyValue));
+            return Success("删除成功。");
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetFormJson(string keyValue)
+        {
+            var data = objTDeviceApp.GetForm(keyValue);
+            return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetGridJson(string itemId, string keyword)
+        {
+            var data = objTDeviceApp.GetList(itemId, keyword);
+            return Content(data.ToJson());
+        }
+
         /// <summary>
         /// 提交添加和编辑
         /// </summary>
@@ -53,6 +79,7 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
         public ActionResult GetTreeSelectJson()
         {
            var data = organizeApp.GetList(OperatorProvider.Provider.GetCurrent().OrganizeId);
+            data.RemoveAt(0);
             return Content(data.ToJson());
             //var treeList = new List<TreeSelectModel>();
             //foreach (OrganizeEntity item in data)
