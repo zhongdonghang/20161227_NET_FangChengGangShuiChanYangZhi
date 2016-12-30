@@ -21,6 +21,13 @@ namespace NFine.Application.Meteorological
 		private ITMeteorologicalStationRepository service = new TMeteorologicalStationRepository();
 
 
+        public List<TMeteorologicalStationEntity> GetList() 
+        {
+            var expression = ExtLinq.True<TMeteorologicalStationEntity>();
+
+            return service.IQueryable().ToList();
+        }
+
         public List<TMeteorologicalStationEntity> GetList(Pagination pagination, string keyword)
         {
             var expression = ExtLinq.True<TMeteorologicalStationEntity>();

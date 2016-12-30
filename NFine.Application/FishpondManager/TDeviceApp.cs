@@ -98,8 +98,6 @@ namespace NFine.Application.FishpondManager
             {
                 throw new Exception("已经存在相同的设备编号，请更换一个");
             }
-
-
         }
     }
 }

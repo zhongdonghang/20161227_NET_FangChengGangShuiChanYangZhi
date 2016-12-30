@@ -21,7 +21,24 @@ namespace NFine.Application.FishpondManager
     {
 		private ITWeatherDataRepository service = new TWeatherDataRepository();
 
-		public List<TWeatherDataEntity> GetList(Pagination pagination, string queryJson)
+
+        public List<TWeatherDataEntity> GetList(Pagination pagination, string keyword, string itemId)
+        {
+            var expression = ExtLinq.True<TWeatherDataEntity>();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.F_Station.Contains(keyword));
+                //expression = expression.Or(t => t.F_Station_Code.Contains(keyword));
+            }
+
+            expression = expression.And(t => t.F_Station_Code == itemId);
+
+            List<TWeatherDataEntity> list = service.FindList(expression, pagination);
+            return list;
+        }
+
+        public List<TWeatherDataEntity> GetList(Pagination pagination, string queryJson)
         {
 		    var expression = ExtLinq.True<TWeatherDataEntity>();
             var queryParam = queryJson.ToJObject();
