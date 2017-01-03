@@ -166,6 +166,8 @@
     <Build Include="dbo\Tables\T_Weather_Data.sql" />
     <Build Include="dbo\Tables\T_Sensor_Data.sql" />
     <Build Include="dbo\Tables\T_Meteorological_Station.sql" />
+    <Build Include="dbo\Tables\T_WarningRuleMainSetting.sql" />
+    <Build Include="dbo\Tables\T_WarningRuleDetailsSetting.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="T_Device_Type_Insert.PostDeployment1.sql" />

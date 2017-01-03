@@ -42,6 +42,8 @@
     <Compile Include="FishpondManager\TDeviceRepository.cs" />
     <Compile Include="FishpondManager\TDeviceTypeRepository.cs" />
     <Compile Include="FishpondManager\TSensorDataRepository.cs" />
+    <Compile Include="FishpondManager\TWarningRuleDetailsSettingRepository.cs" />
+    <Compile Include="FishpondManager\TWarningRuleMainSettingRepository.cs" />
     <Compile Include="FishpondManager\TWeatherDataRepository.cs" />
     <Compile Include="Meteorological\TMeteorologicalStationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

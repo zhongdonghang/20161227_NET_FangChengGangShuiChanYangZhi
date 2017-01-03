@@ -7,7 +7,7 @@
 // * history : Created by T4 12/29/2016 15:24:26 
 // </copyright>
 //-----------------------------------------------------------------------
-using Fine.Repository.FishpondManager;
+//using Fine.Repository.FishpondManager;
 using NFine.Code;
 using NFine.Domain.Entity.FishpondManager;
 using NFine.Domain.IRepository.FishpondManager;

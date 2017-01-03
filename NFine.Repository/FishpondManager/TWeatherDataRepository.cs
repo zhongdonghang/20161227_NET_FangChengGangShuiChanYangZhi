@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fine.Repository.FishpondManager
+namespace NFine.Repository.FishpondManager
 {
     public class TWeatherDataRepository : RepositoryBase<TWeatherDataEntity>, ITWeatherDataRepository
     {

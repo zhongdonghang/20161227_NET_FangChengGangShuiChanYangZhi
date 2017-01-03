@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------
-// <copyright file=" TSensorData.cs" company="NFine">
+// <copyright file=" TWarningRuleMainSetting.cs" company="NFine">
 // * Copyright (C) NFine.Framework  All Rights Reserved
 // * version : 1.0
 // * author  : NFine.Framework
-// * FileName: TSensorData.cs
-// * history : Created by T4 12/29/2016 15:24:20 
+// * FileName: TWarningRuleMainSetting.cs
+// * history : Created by T4 01/03/2017 17:22:32 
 // </copyright>
 //-----------------------------------------------------------------------
 using NFine.Data;
@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace NFine.Repository.FishpondManager
 {
-    public class TSensorDataRepository : RepositoryBase<TSensorDataEntity>, ITSensorDataRepository
+    public class TWarningRuleMainSettingRepository : RepositoryBase<TWarningRuleMainSettingEntity>, ITWarningRuleMainSettingRepository
     {
     }
 }
