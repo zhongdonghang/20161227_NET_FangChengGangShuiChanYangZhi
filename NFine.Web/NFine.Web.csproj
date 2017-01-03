@@ -121,8 +121,11 @@
     <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
+    <Compile Include="Areas\FishpondManager\Controllers\CameraViewController.cs" />
+    <Compile Include="Areas\FishpondManager\Controllers\CircuitViewController.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\DeviceController.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\SensorDataController.cs" />
+    <Compile Include="Areas\FishpondManager\Controllers\WarningSettingController.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\WaterQualityAnalyzerController.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\WeatherDataController.cs" />
     <Compile Include="Areas\FishpondManager\FishpondManagerAreaRegistration.cs" />
@@ -635,6 +638,9 @@
     <Content Include="Areas\Meteorological\Views\Station\Form.cshtml" />
     <Content Include="Areas\Meteorological\Views\Station\Details.cshtml" />
     <Content Include="Areas\FishpondManager\Views\WaterQualityAnalyzer\Index.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\CameraView\Index.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\CircuitView\Index.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\WarningSetting\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

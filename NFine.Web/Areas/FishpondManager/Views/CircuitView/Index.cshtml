@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<script>
+    $(function () {
+        $('#layout').layout();
+        treeView();
+        gridList();
+    });
+    function treeView() {
+        $("#itemTree").treeview({
+            url: "/FishpondManager/Device/GetTreeJson",
+            onnodeclick: function (item) {
+                $("#txt_keyword").val('');
+                $('#btn_search').trigger("click");
+            }
+        });
+    }
+
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "主键", name: "F_Id", hidden: true, key: true },
+                { label: '设备名称', name: 'F_CName', width: 150, align: 'left' },
+                { label: '设备编号', name: 'F_Code', width: 100, align: 'left' },
+               {
+                   label: '是否可用', name: 'F_EnabledMark', width: 60, align: 'center',
+                   formatter: function (cellvalue, options, rowObject) {
+                       if (cellvalue == true) {
+                           return '可用';
+                       } else {
+                           return '不可用';
+                       }
+                   }
+               },
+                 { label: '描述', name: 'F_Description', width: 175, align: 'left' }
+            ],
+            pager: "#gridPager",
+            sortname: 'F_CreatorTime desc',
+            viewrecords: true
+        });
+        $("#btn_search").click(
+            function () {
+                $gridList.jqGrid('setGridParam', {
+                    url: "/FishpondManager/CircuitView/GetGridJson",
+                    postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
+                }).trigger('reloadGrid');
+            }
+        );
+    }
+
+    function btn_OpenCircuit() {
+        $.modalAlert("尚未匹配智能开关", "error");
+    }
+
+    function btn_CloseCircuit() {
+        $.modalAlert("尚未匹配智能开关", "error");
+    }
+
+</script>
+<div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
+    <div class="ui-layout-west">
+        <div id="itemTree"></div>
+    </div>
+    <div class="ui-layout-center">
+        <div class="topPanel">
+            <div class="toolbar">
+                <div class="btn-group">
+                    <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+                </div>
+
+                <div class="operate">
+                    <ul class="nav nav-pills">
+                        <li class="first">已选中<span>1</span>项</li>
+                        <li><a id="NF-Open" authorize="yes" onclick="btn_OpenCircuit()"><i class="fa fa-pencil-square-o"></i>打开</a></li>
+                        <li><a id="NF-Close" authorize="yes" onclick="btn_CloseCircuit()"><i class="fa fa-pencil-square-o"></i>关闭</a></li>
+                    </ul>
+                    <a href="javascript:;" class="close"></a>
+                </div>
+                <script>$('.toolbar').authorizeButton()</script>
+            </div>
+            <div class="search">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <input id="txt_keyword" type="text" class="form-control" placeholder="设备名称/编号" style="width: 200px;">
+                                <span class="input-group-btn">
+                                    <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="gridPanel">
+            <table id="gridList"></table>
+            <div id="gridPager"></div>
+        </div>
+    </div>
+</div>
