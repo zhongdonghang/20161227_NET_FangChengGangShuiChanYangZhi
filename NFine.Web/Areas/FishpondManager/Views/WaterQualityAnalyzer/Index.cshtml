@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+@model NFine.Domain._02_ViewModel.RptFishpond.RptWaterQualityAnalyzer
+<link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+<script src="~/Content/js/highcharts/highcharts.js"></script>
+
+<script>
+
+
+
+    $(function () {
+            $('#container').highcharts({
+                chart: {
+                    zoomType: 'x'
+                },
+                title: {
+                    @if (Model != null)
+                    {
+                        <text>
+                            text: '@Model.Title',
+                        </text>
+                    }
+                    else {
+                         <text>
+                            text: '请点击左边选择要查看的节点',
+                        </text>
+                    }
+
+                },
+                subtitle: {
+                    text: document.ontouchstart === undefined ?
+                        '框选放大' :
+                        '手势放大'
+                },
+                xAxis: {
+                    categories: ['1小时前', '2小时前', '3小时前', '4小时前', '5小时前', '6小时前', '7小时前', '8小时前', '9小时前', '10小时前', '11小时前', '12小时前']
+                },
+                yAxis: {
+                    title: {
+                        text: '数值'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                plotOptions: {
+                    series: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    alert(this.series.name + "," + this.x + "," + this.y)
+                                }
+                            }
+                        },
+                        marker: {
+                            lineWidth: 1
+                        }
+                    }
+                },
+
+                series: [{
+                    name: '溶氧量',
+                    @if (Model == null)
+                    {
+                        <text>
+                            data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                            data: [@Model.DOValues[0], @Model.DOValues[1], @Model.DOValues[2], @Model.DOValues[3], @Model.DOValues[4], @Model.DOValues[5], @Model.DOValues[6], @Model.DOValues[7], @Model.DOValues[8], @Model.DOValues[9], @Model.DOValues[10], @Model.DOValues[11]]
+                        </text>
+                    }
+
+                }, {
+                    name: 'PH值',
+                  
+                    @if (Model == null)
+                        {
+                            <text>
+                                data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+                            </text>
+                        }
+                    else
+                    {
+                        <text>
+                            data: [@Model.F_PHValues[0], @Model.F_PHValues[1], @Model.F_PHValues[2], @Model.F_PHValues[3], @Model.F_PHValues[4], @Model.F_PHValues[5], @Model.F_PHValues[6], @Model.F_PHValues[7], @Model.F_PHValues[8], @Model.F_PHValues[9], @Model.F_PHValues[10], @Model.F_PHValues[11]]
+                        </text>
+                    }
+
+
+                }, {
+                    name: '水温',
+                      @if (Model == null)
+                    {
+                        <text>
+                            data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+                        </text>
+                    }
+                else
+                {
+                    <text>
+                        data: [@Model.TemperatureValues[0], @Model.TemperatureValues[1], @Model.TemperatureValues[2], @Model.TemperatureValues[3], @Model.TemperatureValues[4], @Model.TemperatureValues[5], @Model.TemperatureValues[6], @Model.TemperatureValues[7], @Model.TemperatureValues[8], @Model.TemperatureValues[9], @Model.TemperatureValues[10], @Model.TemperatureValues[11]]
+                    </text>
+                }
+                }]
+
+
+            });
+        });
+
+</script>
+
+<script>
+    $(function () {
+        $('#layout').layout();
+        treeView();
+        gridList();
+    });
+    function treeView() {
+        $("#itemTree").treeview({
+            url: "/FishpondManager/WaterQualityAnalyzer/GetTreeJson",
+            onnodeclick: function (item) {
+                $("#SelectDevice").find("option").not(":first").remove();
+                $("#SelectDevice").bindSelect({
+                    url: "/FishpondManager/WaterQualityAnalyzer/GetDeviceGridJson?orgNo=" + $("#itemTree").getCurrentNode().id,
+                    id: "F_Code",
+                    text: "F_CName"
+                });
+            
+            }
+        });
+    }
+
+    function SelectDeviceChange()
+    {
+        //   alert( $("#SelectDevice").val());
+        location.href = "/FishpondManager/WaterQualityAnalyzer/CreateRptLastPage?itemId=" + $("#SelectDevice").val();
+        $(".SelectDevice").val($("#SelectDevice").val());
+    }
+
+
+</script>
+
+
+
+<div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
+    <div class="ui-layout-west">
+        <div id="itemTree"></div>
+    </div>
+    <div class="ui-layout-center">
+
+        <div class="search">
+            <table>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <select id="SelectDevice" name="SelectDevice" class="form-control required" onchange="SelectDeviceChange()">
+                                <option value="0">==请选择要查看报表的设备==</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+
+
+            </div>
+        </div>
+</div>

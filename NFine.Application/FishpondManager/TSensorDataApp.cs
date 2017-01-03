@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------
 using Fine.Repository.FishpondManager;
 using NFine.Code;
+using NFine.Domain._02_ViewModel.RptFishpond;
 using NFine.Domain.Entity.FishpondManager;
 using NFine.Domain.IRepository.FishpondManager;
 using NFine.Repository.FishpondManager;
@@ -21,6 +22,51 @@ namespace NFine.Application.FishpondManager
     {
 		private ITSensorDataRepository service = new TSensorDataRepository();
 
+
+        /// <summary>
+        /// 设备编号
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        public RptWaterQualityAnalyzer GetReportForWaterQualityAnalyzer(string itemId)
+        {
+            RptWaterQualityAnalyzer rpt = new RptWaterQualityAnalyzer();
+
+            var expression = ExtLinq.True<TSensorDataEntity>();
+            List<TSensorDataEntity> list = service.IQueryable(t => t.F_Device_Code == itemId).OrderByDescending(t=>t.F_CreatorTime).Take(12).ToList();
+            if (list.Count > 0)
+            {
+                rpt.Title = list[0].F_Device_Name + "最近12小时水体趋势报表";
+            }
+            else
+            {
+                rpt = null;
+                return rpt;
+            }
+            
+            rpt.F_PHValues = new List<string>();
+            rpt.TemperatureValues = new List<string>();
+            rpt.DOValues = new List<string>();
+            foreach (TSensorDataEntity item in list)
+            {
+                rpt.F_PHValues.Add(item.F_PH);
+                rpt.TemperatureValues.Add(item.F_Water_Temperature);
+                rpt.DOValues.Add(item.F_Dissolved_Oxygen);
+            }
+            return rpt;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        public List<TSensorDataEntity> GetList(string itemId)
+        {
+            var expression = ExtLinq.True<TSensorDataEntity>();
+            List<TSensorDataEntity> list = service.IQueryable(t => t.F_OrgNo == itemId).Take(12).ToList();
+            return list;
+        }
 
         public List<TSensorDataEntity> GetList(Pagination pagination, string keyword , string itemId)
         {

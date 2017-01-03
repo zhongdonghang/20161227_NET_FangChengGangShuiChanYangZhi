@@ -123,6 +123,7 @@
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\DeviceController.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\SensorDataController.cs" />
+    <Compile Include="Areas\FishpondManager\Controllers\WaterQualityAnalyzerController.cs" />
     <Compile Include="Areas\FishpondManager\Controllers\WeatherDataController.cs" />
     <Compile Include="Areas\FishpondManager\FishpondManagerAreaRegistration.cs" />
     <Compile Include="Areas\Meteorological\Controllers\StationController.cs" />
@@ -633,6 +634,7 @@
     <Content Include="Areas\Meteorological\Views\Station\Index.cshtml" />
     <Content Include="Areas\Meteorological\Views\Station\Form.cshtml" />
     <Content Include="Areas\Meteorological\Views\Station\Details.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\WaterQualityAnalyzer\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
