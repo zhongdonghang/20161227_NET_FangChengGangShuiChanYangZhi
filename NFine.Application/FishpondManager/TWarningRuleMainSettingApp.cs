@@ -24,17 +24,31 @@ namespace NFine.Application.FishpondManager
     {
 		private ITWarningRuleMainSettingRepository service = new TWarningRuleMainSettingRepository();
 
-		public List<TWarningRuleMainSettingEntity> GetList(Pagination pagination, string queryJson)
+        public List<TWarningRuleMainSettingEntity> GetList(Pagination pagination, string keyword)
         {
-		    var expression = ExtLinq.True<TWarningRuleMainSettingEntity>();
-            var queryParam = queryJson.ToJObject();
-            if (!queryParam["keyword"].IsEmpty())
+            var expression = ExtLinq.True<TWarningRuleMainSettingEntity>();
+
+            if (!string.IsNullOrEmpty(keyword))
             {
-                string keyword = queryParam["keyword"].ToString();
                 expression = expression.And(t => t.F_Title.Contains(keyword));
             }
-            return service.FindList(expression, pagination);
+
+          //  expression = expression.And(t => t.F_OrgNo == itemId);
+            List<TWarningRuleMainSettingEntity> list = service.FindList(expression, pagination);
+            return list;
         }
+
+      //  public List<TWarningRuleMainSettingEntity> GetList(Pagination pagination, string queryJson)
+      //  {
+		    //var expression = ExtLinq.True<TWarningRuleMainSettingEntity>();
+      //      var queryParam = queryJson.ToJObject();
+      //      if (!queryParam["keyword"].IsEmpty())
+      //      {
+      //          string keyword = queryParam["keyword"].ToString();
+      //          expression = expression.And(t => t.F_Title.Contains(keyword));
+      //      }
+      //      return service.FindList(expression, pagination);
+      //  }
 
 	    public TWarningRuleMainSettingEntity GetForm(string keyValue)
         {

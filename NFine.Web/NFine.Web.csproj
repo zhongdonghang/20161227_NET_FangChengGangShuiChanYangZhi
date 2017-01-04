@@ -641,6 +641,8 @@
     <Content Include="Areas\FishpondManager\Views\CameraView\Index.cshtml" />
     <Content Include="Areas\FishpondManager\Views\CircuitView\Index.cshtml" />
     <Content Include="Areas\FishpondManager\Views\WarningSetting\Index.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\WarningSetting\Form.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\WarningSetting\Details.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

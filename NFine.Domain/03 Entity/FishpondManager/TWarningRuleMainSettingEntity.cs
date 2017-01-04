@@ -25,9 +25,9 @@ namespace NFine.Domain.Entity.FishpondManager
 					public  String  F_Title { get; set; }
 					public  String  F_RuleContent { get; set; }
 					public  String  F_WarningColor { get; set; }
-					public  String  F_IsSMS { get; set; }
-					public  String  F_IsAppPush { get; set; }
-					public  String  F_IsPCPush { get; set; }
+					public Boolean? F_IsSMS { get; set; }
+					public Boolean? F_IsAppPush { get; set; }
+					public Boolean? F_IsPCPush { get; set; }
 					public  String  F_WarningCategoryItemId { get; set; }
 					public  String  F_WarningCategoryItemText { get; set; }
 					public  Int32?  F_SortCode { get; set; }
