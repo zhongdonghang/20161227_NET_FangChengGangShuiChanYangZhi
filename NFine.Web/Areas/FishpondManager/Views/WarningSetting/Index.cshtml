@@ -78,6 +78,18 @@
             btn: null,
         });
     }
+
+    function btn_define() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Define",
+            title: "定义规则",
+            url: "/FishpondManager/WarningSetting/RuleDefine?F_MailRuleId=" + keyValue,
+            width: "800px",
+            height: "550px",
+            btn: null,
+        });
+    }
 </script>
 
 <div class="topPanel">

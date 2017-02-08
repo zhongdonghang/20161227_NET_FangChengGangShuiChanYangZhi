@@ -24,7 +24,15 @@ namespace NFine.Application.FishpondManager
     {
 		private ITWarningRuleDetailsSettingRepository service = new TWarningRuleDetailsSettingRepository();
 
-		public List<TWarningRuleDetailsSettingEntity> GetList(Pagination pagination, string queryJson)
+
+        public List<TWarningRuleDetailsSettingEntity> GetRuleDetailsGridJson(Pagination pagination, string keywords,string F_MailRuleId)
+        {
+            var expression = ExtLinq.True<TWarningRuleDetailsSettingEntity>();
+            expression = expression.And(t => t.F_MailRuleId == F_MailRuleId);
+            return service.FindList(expression, pagination);
+        }
+
+        public List<TWarningRuleDetailsSettingEntity> GetList(Pagination pagination, string queryJson)
         {
 		    var expression = ExtLinq.True<TWarningRuleDetailsSettingEntity>();
             var queryParam = queryJson.ToJObject();

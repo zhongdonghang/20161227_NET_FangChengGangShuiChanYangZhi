@@ -110,6 +110,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\appapi.asmx.cs">
+      <DependentUpon>appapi.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="App_Start\01 Handler\HandlerAjaxOnlyAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerAuthorizeAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerErrorAttribute.cs" />
@@ -161,6 +165,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Api\appapi.asmx" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-ui.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -643,6 +648,7 @@
     <Content Include="Areas\FishpondManager\Views\WarningSetting\Index.cshtml" />
     <Content Include="Areas\FishpondManager\Views\WarningSetting\Form.cshtml" />
     <Content Include="Areas\FishpondManager\Views\WarningSetting\Details.cshtml" />
+    <Content Include="Areas\FishpondManager\Views\WarningSetting\RuleDefine.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

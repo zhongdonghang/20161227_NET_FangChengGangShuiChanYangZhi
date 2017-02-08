@@ -16,7 +16,7 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
         // GET: /FishpondManager/WarningSetting/
 
         private TWarningRuleMainSettingApp objTWarningRuleMainSettingApp = new TWarningRuleMainSettingApp();
-
+        private TWarningRuleDetailsSettingApp objTWarningRuleDetailsSettingApp = new TWarningRuleDetailsSettingApp();
         private ItemsDetailApp objItemsDetailApp = new ItemsDetailApp();
 
 
@@ -35,6 +35,21 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
             var data  =  objItemsDetailApp.GetList("bdfec8d8-20e4-4d8a-a7f3-a28ca0fa0555", "");
           //  var data = dutyApp.GetList(keyword);
             return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetRuleDetailsGridJson(string F_MailRuleId)
+        {
+            return null;
+            //var data = new
+            //{
+            //    rows = objTWarningRuleDetailsSettingApp.GetRuleDetailsGridJson(null,"", F_MailRuleId),
+            //    total = pagination.total,
+            //    page = pagination.page,
+            //    records = pagination.records
+            //};
+            //return Content(data.ToJson());
         }
 
         [HttpGet]
@@ -67,6 +82,11 @@ namespace NFine.Web.Areas.FishpondManager.Controllers
             objTWarningRuleMainSettingEntity.F_WarningCategoryItemText = objItemsDetailApp.GetForm(objTWarningRuleMainSettingEntity.F_WarningCategoryItemId).F_ItemName;
             objTWarningRuleMainSettingApp.SubmitForm(objTWarningRuleMainSettingEntity, keyValue);
             return Success("操作成功。");
+        }
+
+        public ActionResult RuleDefine()
+        {
+            return View();
         }
 
     }
