@@ -122,6 +122,7 @@ namespace NFine.Application.WebApi
             return resultString;
         }
 
+        //获取指定组织架构拥有的设备列表
 
         //获取指定组织架构基地的水质数据
 
