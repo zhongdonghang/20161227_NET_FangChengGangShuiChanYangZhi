@@ -37,5 +37,23 @@ namespace NFine.Web.Api
         {
             HttpContext.Current.Response.Write(ApiService.GetTreeForUser(UserId));
         }
+
+        /// <summary>
+        /// 查询设备类型列表
+        /// </summary>
+        [WebMethod(Description = "查询设备类型列表")]
+        public void GetDeviceTypeList()
+        {
+            HttpContext.Current.Response.Write(ApiService.GetDeviceTypeList());
+        }
+
+        /// <summary>
+        /// 查询设备列表
+        /// </summary>
+        [WebMethod(Description = "查询设备列表")]
+        public void GetDeviceList(string orgNo, string keyword)
+        {
+            HttpContext.Current.Response.Write(ApiService.GetDeviceList( orgNo,  keyword));
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using NFine.Application.FishpondManager;
 using NFine.Application.SystemManage;
 using NFine.Application.SystemSecurity;
 using NFine.Code;
+using NFine.Domain.Entity.FishpondManager;
 using NFine.Domain.Entity.SystemManage;
 using NFine.Domain.Entity.SystemSecurity;
 using NFine.Domain.IRepository.SystemManage;
@@ -124,7 +126,52 @@ namespace NFine.Application.WebApi
             return resultString;
         }
 
+        //获取设备类型
+        public static string GetDeviceTypeList()
+        {
+            ApiResultForList<TDeviceTypeEntity> obj = new ApiResultForList<TDeviceTypeEntity>();
+            try
+            {
+                TDeviceTypeApp objTDeviceTypeApp = new TDeviceTypeApp();
+                List<TDeviceTypeEntity> list = objTDeviceTypeApp.GetList();
+                obj.Msg = "查询成功";
+                obj.Page = list;
+                obj.ResultCode = "0";
+            }
+            catch (Exception ex)
+            {
+                obj.Msg = "查询设备类型列表出错：" + ex.Message;
+                obj.ResultCode = "-1";
+            }
+
+            string  resultString = JsonConvert.SerializeObject(obj);
+            return resultString;
+        }
+
+
         //获取指定组织架构拥有的设备列表
+        public static string GetDeviceList(string orgNo, string keyword)
+        {
+            ApiResultForList<TDeviceEntity> obj = new ApiResultForList<TDeviceEntity>();
+            try
+            {
+                TDeviceApp objTDeviceApp = new TDeviceApp();
+                List<TDeviceEntity> list = objTDeviceApp.GetList(orgNo,keyword);
+                obj.Msg = "查询成功";
+                obj.Page = list;
+                obj.ResultCode = "0";
+            }
+            catch (Exception ex)
+            {
+                obj.Msg = "查询设备列表出错：" + ex.Message;
+                obj.ResultCode = "-1";
+            }
+
+            string resultString = JsonConvert.SerializeObject(obj);
+            return resultString;
+        }
+
+
 
         //获取指定组织架构基地的水质数据
 
