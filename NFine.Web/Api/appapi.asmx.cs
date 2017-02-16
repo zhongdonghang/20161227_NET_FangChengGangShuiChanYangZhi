@@ -55,5 +55,15 @@ namespace NFine.Web.Api
         {
             HttpContext.Current.Response.Write(ApiService.GetDeviceList( orgNo,  keyword));
         }
+
+        /// <summary>
+        /// 查询指定设备的采集数据列表
+        /// </summary>
+        [WebMethod(Description = "查询指定设备的采集数据列表")]
+        public void GetSensorDataByDeviceCode(string F_Device_Code)
+        {
+            HttpContext.Current.Response.Write(ApiService.GetSensorDataByDeviceId(F_Device_Code));
+        }
+
     }
 }

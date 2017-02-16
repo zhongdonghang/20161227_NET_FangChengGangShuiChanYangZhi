@@ -6,7 +6,9 @@ using NFine.Code;
 using NFine.Domain.Entity.FishpondManager;
 using NFine.Domain.Entity.SystemManage;
 using NFine.Domain.Entity.SystemSecurity;
+using NFine.Domain.IRepository.FishpondManager;
 using NFine.Domain.IRepository.SystemManage;
+using NFine.Repository.FishpondManager;
 using NFine.Repository.SystemManage;
 using System;
 using System.Collections.Generic;
@@ -173,7 +175,29 @@ namespace NFine.Application.WebApi
 
 
 
-        //获取指定组织架构基地的水质数据
+        //获取指定设备的水质数据
+        public static string GetSensorDataByDeviceId(string F_Device_Code)
+        {
+
+            ITSensorDataRepository service = new TSensorDataRepository();
+            ApiResultForList<TSensorDataEntity> obj = new ApiResultForList<TSensorDataEntity>();
+            try
+            {
+                var expression = ExtLinq.True<TSensorDataEntity>();
+                List<TSensorDataEntity> list = service.IQueryable(t => t.F_Device_Code == F_Device_Code).Take(12).ToList();
+                obj.Msg = "查询成功";
+                obj.Page = list;
+                obj.ResultCode = "0";
+            }
+            catch (Exception ex)
+            {
+                obj.Msg = "查询异常："+ex.ToString();
+                obj.ResultCode = "-1";
+            }
+            string resultString = JsonConvert.SerializeObject(obj);
+            return resultString;
+        }
+
 
         //获取指定气象采集站的气象数据
 
