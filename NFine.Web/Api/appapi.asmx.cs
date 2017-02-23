@@ -66,5 +66,18 @@ namespace NFine.Web.Api
             HttpContext.Current.Response.Write(ApiService.GetSensorDataByDeviceId(F_Device_Code));
         }
 
+        //
+        [WebMethod(Description = "返回气象监测站列表")]
+        public void GetT_Meteorological_StationList()
+        {
+            HttpContext.Current.Response.Write(ApiService.GetT_Meteorological_StationList());
+        }
+
+        [WebMethod(Description = "根据传入的气象监测站代码查询天气数据指标")]
+        public void GetT_Weather_Data(string F_Station_Code)
+        {
+            HttpContext.Current.Response.Write(ApiService.GetT_Weather_Data(F_Station_Code));
+        }
+
     }
 }

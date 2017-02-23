@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using NFine.Application.FishpondManager;
+using NFine.Application.Meteorological;
 using NFine.Application.SystemManage;
 using NFine.Application.SystemSecurity;
 using NFine.Code;
 using NFine.Domain.Entity.FishpondManager;
+using NFine.Domain.Entity.Meteorological;
 using NFine.Domain.Entity.SystemManage;
 using NFine.Domain.Entity.SystemSecurity;
 using NFine.Domain.IRepository.FishpondManager;
@@ -184,7 +186,7 @@ namespace NFine.Application.WebApi
             try
             {
                 var expression = ExtLinq.True<TSensorDataEntity>();
-                List<TSensorDataEntity> list = service.IQueryable(t => t.F_Device_Code == F_Device_Code).Take(12).ToList();
+                List<TSensorDataEntity> list = service.IQueryable(t => t.F_Device_Code == F_Device_Code).OrderByDescending(t => t.F_CreatorTime).Take(200).ToList();
                 obj.Msg = "查询成功";
                 obj.Page = list;
                 obj.ResultCode = "0";
@@ -198,8 +200,51 @@ namespace NFine.Application.WebApi
             return resultString;
         }
 
+        //返回气象监测站列表
+        public static string GetT_Meteorological_StationList()
+        {
+            ApiResultForList<TMeteorologicalStationEntity> obj = new ApiResultForList<TMeteorologicalStationEntity>();
+            try
+            {
+                TMeteorologicalStationApp objTMeteorologicalStationApp = new TMeteorologicalStationApp();
+                List<TMeteorologicalStationEntity> list = objTMeteorologicalStationApp.GetList();
+                obj.Msg = "查询成功";
+                obj.Page = list;
+                obj.ResultCode = "0";
+            }
+            catch (Exception ex)
+            {
+                obj.Msg = "查询监测站列表出错：" + ex.Message;
+                obj.ResultCode = "-1";
+            }
+            string resultString = JsonConvert.SerializeObject(obj);
+            return resultString;
+        }
 
-        //获取指定气象采集站的气象数据
+
+        //获取指定气象采集站的气象数据F_Station_Code
+        public static string GetT_Weather_Data(string F_Station_Code)
+        {
+            ITWeatherDataRepository service = new TWeatherDataRepository();
+            ApiResultForList<TWeatherDataEntity> obj = new ApiResultForList<TWeatherDataEntity>();
+            try
+            {
+                var expression = ExtLinq.True<TWeatherDataEntity>();
+                List<TWeatherDataEntity> list = service.IQueryable(t => t.F_Station_Code == F_Station_Code).OrderByDescending(t=>t.F_CreatorTime).Take(24).ToList();
+                obj.Msg = "查询成功";
+                obj.Page = list;
+                obj.ResultCode = "0";
+            }
+            catch (Exception ex)
+            {
+                obj.Msg = "查询异常：" + ex.ToString();
+                obj.ResultCode = "-1";
+            }
+            string resultString = JsonConvert.SerializeObject(obj);
+            return resultString;
+        }
+
+
 
 
 
