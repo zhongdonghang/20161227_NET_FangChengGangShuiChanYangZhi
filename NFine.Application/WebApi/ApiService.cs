@@ -152,13 +152,13 @@ namespace NFine.Application.WebApi
 
 
         //获取指定组织架构拥有的设备列表
-        public static string GetDeviceList(string orgNo, string keyword)
+        public static string GetDeviceList(string orgNo, string keyword, string deviceType)
         {
             ApiResultForList<TDeviceEntity> obj = new ApiResultForList<TDeviceEntity>();
             try
             {
                 TDeviceApp objTDeviceApp = new TDeviceApp();
-                List<TDeviceEntity> list = objTDeviceApp.GetList(orgNo,keyword);
+                List<TDeviceEntity> list = objTDeviceApp.GetListByDeviceType(orgNo,keyword, deviceType);
                 obj.Msg = "查询成功";
                 obj.Page = list;
                 obj.ResultCode = "0";
@@ -200,6 +200,8 @@ namespace NFine.Application.WebApi
 
 
         //获取指定气象采集站的气象数据
+
+
 
         //获取指定基地的摄像头列表
 

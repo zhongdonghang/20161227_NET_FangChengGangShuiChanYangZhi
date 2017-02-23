@@ -49,11 +49,12 @@ namespace NFine.Web.Api
 
         /// <summary>
         /// 查询设备列表
+        /// <param name="orgNo"></param>
         /// </summary>
-        [WebMethod(Description = "查询设备列表")]
-        public void GetDeviceList(string orgNo, string keyword)
+        [WebMethod(Description = "根据架构编号和设备类型查询设备列表，1：摄像头，2：水体检测仪，3：投料机开关，4：增氧机开关")]
+        public void GetDeviceList(string orgNo, string keyword,string deviceType)
         {
-            HttpContext.Current.Response.Write(ApiService.GetDeviceList( orgNo,  keyword));
+            HttpContext.Current.Response.Write(ApiService.GetDeviceList( orgNo,  keyword, deviceType));
         }
 
         /// <summary>
